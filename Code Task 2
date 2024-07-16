@@ -1,1 +1,97 @@
+# Evaluating the classifier
+# printing every score of the classifier
+# scoring in anything
+from sklearn.metrics import classification_report, accuracy_score 
+from sklearn.metrics import precision_score, recall_score
+from sklearn.metrics import f1_score, matthews_corrcoef
+from sklearn.metrics import confusion_matrix
+
+n_outliers = len(fraud)
+n_errors = (yPred != yTest).sum()
+print("The model used is Random Forest classifier")
+
+acc = accuracy_score(yTest, yPred)
+print("The accuracy is {}".format(acc))
+
+prec = precision_score(yTest, yPred)
+print("The precision is {}".format(prec))
+
+rec = recall_score(yTest, yPred)
+print("The recall is {}".format(rec))
+
+f1 = f1_score(yTest, yPred)
+print("The F1-Score is {}".format(f1))
+
+MCC = matthews_corrcoef(yTest, yPred)
+print("The Matthews correlation coefficient is{}".format(MCC))
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, roc_auc_score, roc_curve
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load the dataset
+data = pd.read_csv('creditcard.csv')
+
+# Display the first few rows of the data
+print(data.head())
+
+# Check for missing values
+print(data.isnull().sum())
+
+# Feature scaling (optional, if necessary)
+from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+data['Amount'] = scaler.fit_transform(data[['Amount']])
+
+# Split the data into features and target variable
+X = data.drop('Class', axis=1)
+y = data['Class']
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+
+# Create and train the logistic regression model
+model = LogisticRegression(max_iter=1000)
+model.fit(X_train, y_train)
+
+# Make predictions on the test set
+y_pred = model.predict(X_test)
+y_pred_proba = model.predict_proba(X_test)[:, 1]
+
+# Calculate evaluation metrics
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+f1 = f1_score(y_test, y_pred)
+roc_auc = roc_auc_score(y_test, y_pred_proba)
+
+print(f"Accuracy: {accuracy}")
+print(f"Precision: {precision}")
+print(f"Recall: {recall}")
+print(f"F1 Score: {f1}")
+print(f"ROC AUC Score: {roc_auc}")
+
+# Confusion Matrix
+conf_matrix = confusion_matrix(y_test, y_pred)
+plt.figure(figsize=(8, 6))
+sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues')
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+plt.title('Confusion Matrix')
+plt.show()
+
+# ROC Curve
+fpr, tpr, thresholds = roc_curve(y_test, y_pred_proba)
+plt.figure(figsize=(8, 6))
+plt.plot(fpr, tpr, label='Logistic Regression')
+plt.plot([0, 1], [0, 1], 'k--')
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('ROC Curve')
+plt.legend()
+plt.show()
 
