@@ -1,1 +1,190 @@
+import nltk
+from nltk.corpus import movie_reviews
+import random
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report
 
+# Download the dataset
+nltk.download('movie_reviews')
+
+# Load the dataset
+documents = [(list(movie_reviews.words(fileid)), category)
+             for category in movie_reviews.categories()
+             for fileid in movie_reviews.fileids(category)]
+
+# Shuffle the documents
+random.shuffle(documents)
+
+# Prepare the data
+data = [" ".join(doc) for doc, category in documents]
+labels = [category for doc, category in documents]
+
+# Create a DataFrame
+df = pd.DataFrame({'review': data, 'sentiment': labels})
+
+# Encode the target labels
+df['sentiment'] = df['sentiment'].map({'pos': 1, 'neg': 0})
+
+# Split the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(df['review'], df['sentiment'], test_size=0.2, random_state=42)
+
+# Vectorize the text data using TF-IDF
+tfidf = TfidfVectorizer(stop_words='english', max_features=5000)
+X_train_tfidf = tfidf.fit_transform(X_train)
+X_test_tfidf = tfidf.transform(X_test)
+
+# Train the Naive Bayes model
+nb_model = MultinomialNB()
+nb_model.fit(X_train_tfidf, y_train)
+
+# Make predictions on the testing set
+y_pred = nb_model.predict(X_test_tfidf)
+
+# Evaluate the model
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+f1 = f1_score(y_test, y_pred)
+
+print(f"Accuracy: {accuracy}")
+print(f"Precision: {precision}")
+print(f"Recall: {recall}")
+print(f"F1 Score: {f1}")
+
+# Detailed classification report
+print(classification_report(y_test, y_pred, target_names=['Negative', 'Positive']))
+
+print(f'The number of columns: = {df.shape[1]}\n The number of rows: = {df.shape[0]}')
+df['sentiment'].value_counts()
+df['review'] = df['review'].str.lower()
+df.head()
+X = df['review']
+Y = df['sentiment']
+vect = TfidfVectorizer()
+X = vect.fit_transform(df['review'])
+X.shape
+x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.3, random_state=42)
+print("Size of x_train: ", (x_train.shape))
+print("Size of y_train: ", (y_train.shape))
+print("Size of x_test: ", (x_test.shape))
+print("Size of y_test: ", (y_test.shape))
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.metrics import accuracy_score
+mnb = MultinomialNB()
+mnb.fit(x_train, y_train)
+mnb_pred = mnb.predict(x_test)
+mnb_acc = accuracy_score(mnb_pred, y_test)
+print("Test accuracy: {:.2f}%".format(mnb_acc*100))
+from sklearn.metrics import confusion_matrix, classification_report
+print(confusion_matrix(y_test, mnb_pred))
+print("\n")
+print(classification_report(y_test, mnb_pred))
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Example data for Y_test and y_pred
+Y_test = [1, 2, 3, 4, 5]
+y_pred = [1.1, 1.9, 3.2, 4.1, 4.8]
+
+# Create the scatter plot
+sns.scatterplot(x=Y_test, y=y_pred)
+
+# Adding labels and title
+plt.xlabel('Y_test')
+plt.ylabel('y_pred')
+plt.title('Scatter Plot of Y_test vs y_pred')
+
+# Show the plot
+plt.show()
+
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+import matplotlib.pyplot as plt
+import seaborn as sns
+# Sample data
+data = pd.DataFrame({
+    'X': np.random.rand(100) * 10,
+    'Y': np.random.rand(100) * 100
+})
+
+# Display the first few rows of the data
+print(data.head())
+import pandas as pd
+
+# Load the dataset
+df = pd.read_csv('IMDB Dataset.csv')
+
+# Check the first few rows of the dataframe
+print(df.head())
+
+# Preprocess the data: clean and tokenize text, remove stopwords, etc.
+import re
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+
+def preprocess_text(text):
+    # Remove HTML tags
+    text = re.sub(r'<.*?>', '', text)
+    # Tokenize text
+    words = word_tokenize(text)
+    # Remove stopwords
+    words = [word for word in words if word.lower() not in stopwords.words('english')]
+    return ' '.join(words)
+
+# Apply preprocessing
+df['review'] = df['review'].apply(preprocess_text)
+
+print(df.head())
+from sklearn.model_selection import train_test_split
+
+X = df['review']
+y = df['sentiment'].apply(lambda x: 1 if x == 'positive' else 0)
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+vectorizer = TfidfVectorizer(max_features=5000)
+X_train_vec = vectorizer.fit_transform(X_train)
+X_test_vec = vectorizer.transform(X_test)
+from sklearn.linear_model import LogisticRegression
+
+model = LogisticRegression()
+model.fit(X_train_vec, y_train)
+from sklearn.metrics import accuracy_score, classification_report
+
+y_pred = model.predict(X_test_vec)
+accuracy = accuracy_score(y_test, y_pred)
+report = classification_report(y_test, y_pred)
+
+print(f'Accuracy: {accuracy}')
+print(report)
+import nltk
+from nltk.stem import WordNetLemmatizer
+
+nltk.download('wordnet')
+nltk.download('punkt')
+nltk.download('stopwords')
+
+lemmatizer = WordNetLemmatizer()
+
+def preprocess_text(text):
+    # Remove HTML tags
+    text = re.sub(r'<.*?>', '', text)
+    # Remove non-alphabetic characters
+    text = re.sub(r'[^a-zA-Z]', ' ', text)
+    # Tokenize text
+    words = word_tokenize(text)
+    # Remove stopwords and lemmatize
+    words = [lemmatizer.lemmatize(word.lower()) for word in words if word.lower() not in stopwords.words('english')]
+    return ' '.join(words)
+
+# Apply preprocessing
+df['review'] = df['review'].apply(preprocess_text)
+
+print(df.head())
