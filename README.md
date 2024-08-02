@@ -20,6 +20,8 @@ TASK 4 :- BMI TRACKER
 ![Screenshot 2024-08-02 212050](https://github.com/user-attachments/assets/447c2211-23ff-43e3-ae81-9424aa0ab58c)
 ![Screenshot 2024-08-02 212102](https://github.com/user-attachments/assets/e0f4f5c6-6e06-46f8-90c2-b610e1b8ea3f)
 ![Screenshot 2024-08-02 212021](https://github.com/user-attachments/assets/6045635d-effe-4e3d-b8e5-7961f416163b)
+![Screenshot 2024-08-02 212117](https://github.com/user-attachments/assets/36113cc0-6f5b-4be1-8d5d-04e509f8a50c)
+![Screenshot 2024-08-02 212128](https://github.com/user-attachments/assets/a352c44e-62a6-40e8-be06-5aae2133e663)
 
 
 
