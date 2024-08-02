@@ -1,0 +1,525 @@
+# BMI TRACKER
+import pandas as pd
+data = pd.read_csv("fitbit_user_bmi.csv")
+data.head()
+print(data.shape)
+print(data.describe())
+data = data
+data
+import pandas as pd
+
+# Sample DataFrame
+data = pd.DataFrame({
+    'A': [1, 2, 3],
+    'B': [4, 5, 6],
+    'C': [7, 8, 9]
+})
+
+# Display the DataFrame before dropping the column
+print("Before dropping the column:")
+print(data)
+
+# Drop the column 'B'
+data = data.drop(columns=['B'])
+
+# Display the DataFrame after dropping the column
+print("\nAfter dropping the column:")
+print(data)
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Example data for Y_test and y_pred
+Y_test = [1, 2, 3, 4, 5]
+y_pred = [1.1, 1.9, 3.2, 4.1, 4.8]
+
+# Create the scatter plot
+sns.scatterplot(x=Y_test, y=y_pred)
+
+# Adding labels and title
+plt.xlabel('Y_test')
+plt.ylabel('y_pred')
+plt.title('Scatter Plot of Y_test vs y_pred')
+
+# Show the plot
+plt.show()
+
+import pandas as pd
+
+# Example DataFrame
+data = pd.DataFrame({
+    'A': [1, 2, 3],
+    'B': [4, 5, 6],
+    'C': [7, 8, 9]
+})
+
+# Drop a single column
+data = data.drop(columns=['B'])
+
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Example DataFrame
+data = pd.DataFrame({
+    'A': [1, 2, 3, 4, 5],
+    'B': [2, 3, 4, 5, 6],
+    'C': [5, 6, 7, 8, 9]
+})
+
+# Drop column 'B'
+data = data.drop(columns=['B'])
+
+# Assigning Y_test and y_pred from the DataFrame columns
+Y_test = data['A']
+y_pred = data['C']
+
+# Create the scatter plot
+sns.scatterplot(x=Y_test, y=y_pred)
+
+# Adding labels and title
+plt.xlabel('Y_test')
+plt.ylabel('y_pred')
+plt.title('Scatter Plot of Y_test vs y_pred')
+
+# Show the plot
+plt.show()
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Example DataFrame
+data = pd.DataFrame({
+    'Category': ['A', 'B', 'C', 'D'],
+    'Values': [4, 7, 3, 10]
+})
+
+# Display the DataFrame
+print(data)
+
+# Create the bar plot
+sns.barplot(x='Category', y='Values', data=data)
+
+# Adding labels and title
+plt.xlabel('Category')
+plt.ylabel('Values')
+plt.title('Bar Plot of Categories vs Values')
+
+# Show the plot
+plt.show()
+
+# Create a figure and axis
+plt.figure(figsize=(10, 6))
+
+# Create the bar plot with custom colors
+sns.barplot(x='Category', y='Values', data=data, palette='viridis')
+
+# Adding labels and title
+plt.xlabel('Category', fontsize=14)
+plt.ylabel('Values', fontsize=14)
+plt.title('Customized Bar Plot of Categories vs Values', fontsize=16)
+
+# Adding value labels on top of the bars
+for index, value in enumerate(data['Values']):
+    plt.text(index, value + 0.1, str(value), ha='center')
+
+# Show the plot
+plt.show()
+
+# Example DataFrame with multiple categories
+data_grouped = pd.DataFrame({
+    'Category': ['A', 'A', 'B', 'B', 'C', 'C', 'D', 'D'],
+    'Subcategory': ['X', 'Y', 'X', 'Y', 'X', 'Y', 'X', 'Y'],
+    'Values': [4, 5, 7, 6, 1, 2, 8, 9]
+})
+
+# Display the DataFrame
+print(data_grouped)
+
+# Create the grouped bar plot
+sns.barplot(x='Category', y='Values', hue='Subcategory', data=data_grouped, palette='muted')
+
+# Adding labels and title
+plt.xlabel('Category')
+plt.ylabel('Values')
+plt.title('Grouped Bar Plot of Categories vs Values')
+
+# Show the plot
+plt.show()
+
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Make predictions on the test set
+y_pred = model.predict(X_test)
+
+# Calculate Mean Squared Error and R² Score
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print(f"Mean Squared Error: {mse}")
+print(f"R² Score: {r2}")
+
+# Plotting the scatter plot and the regression line
+plt.figure(figsize=(10, 6))
+
+# Scatter plot
+sns.scatterplot(x=X_test['X'], y=y_test, label='Actual')
+
+# Regression line
+plt.plot(X_test['X'], y_pred, color='red', label='Predicted')
+
+# Adding labels and title
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Linear Regression Model')
+plt.legend()
+
+# Show the plot
+plt.show()
+
+# New data for prediction
+new_data = pd.DataFrame({'X': [5, 7, 9]})
+
+# Predict scores for new data
+new_predictions = model.predict(new_data)
+
+# Display the predictions
+print(new_predictions)
+
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Sample data
+data = pd.DataFrame({
+    'X': np.random.rand(100) * 10,
+    'Y': np.random.rand(100) * 100
+})
+
+# Display the first few rows of the data
+print(data.head())
+
+# Split the data into training and testing sets
+X = data[['X']]
+y = data['Y']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Create and train the model
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# Make predictions on the test set
+y_pred = model.predict(X_test)
+
+# Calculate Mean Squared Error and R² Score
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print(f"Mean Squared Error: {mse}")
+print(f"R² Score: {r2}")
+
+# Plotting the scatter plot and the regression line
+plt.figure(figsize=(10, 6))
+
+# Scatter plot
+sns.scatterplot(x=X_test['X'], y=y_test, label='Actual')
+
+# Regression line
+plt.plot(X_test['X'], y_pred, color='red', label='Predicted')
+
+# Adding labels and title
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Linear Regression Model')
+plt.legend()
+
+# Show the plot
+plt.show()
+
+# New data for prediction
+new_data = pd.DataFrame({'X': [5, 7, 9]})
+
+# Predict scores for new data
+new_predictions = model.predict(new_data)
+
+# Display the predictions
+print(new_predictions)
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Sample DataFrame
+data = pd.DataFrame({
+    'A': [1, 2, 3],
+    'B': [4, 5, 6],
+    'C': [7, 8, 9]
+})
+
+# Display the DataFrame before dropping the column
+print("Before dropping the column:")
+print(data)
+
+# Plotting the DataFrame before dropping the column
+data.plot(kind='bar')
+plt.title('DataFrame Before Dropping Column B')
+plt.xlabel('Index')
+plt.ylabel('Values')
+plt.show()
+
+# Drop the column 'B'
+data = data.drop(columns=['B'])
+
+# Display the DataFrame after dropping the column
+print("\nAfter dropping the column:")
+print(data)
+
+# Plotting the DataFrame after dropping the column
+data.plot(kind='bar')
+plt.title('DataFrame After Dropping Column B')
+plt.xlabel('Index')
+plt.ylabel('Values')
+plt.show()
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Sample DataFrame
+data = pd.DataFrame({
+    'A': [1, 2, 3],
+    'B': [4, 5, 6],
+    'C': [7, 8, 9]
+})
+
+# Display the DataFrame before dropping the column
+print("Before dropping the column:")
+print(data)
+
+# Plotting the DataFrame before dropping the column
+data.plot(kind='line', marker='o')
+plt.title('DataFrame Before Dropping Column B')
+plt.xlabel('Index')
+plt.ylabel('Values')
+plt.grid(True)
+plt.show()
+
+# Drop the column 'B'
+data = data.drop(columns=['B'])
+
+# Display the DataFrame after dropping the column
+print("\nAfter dropping the column:")
+print(data)
+
+# Plotting the DataFrame after dropping the column
+data.plot(kind='line', marker='o')
+plt.title('DataFrame After Dropping Column B')
+plt.xlabel('Index')
+plt.ylabel('Values')
+plt.grid(True)
+plt.show()
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Sample DataFrame
+data = pd.DataFrame({
+    'A': [1, 2, 3],
+    'B': [4, 5, 6],
+    'C': [7, 8, 9]
+})
+
+# Display the DataFrame before dropping the column
+print("Before dropping the column:")
+print(data)
+
+# Plotting the DataFrame before dropping the column
+data.plot(kind='line', marker='o')
+plt.title('DataFrame Before Dropping Column B')
+plt.xlabel('Index')
+plt.ylabel('Values')
+plt.grid(True)
+plt.show()
+
+# Drop the column 'B'
+data = data.drop(columns=['B'])
+
+# Display the DataFrame after dropping the column
+print("\nAfter dropping the column:")
+print(data)
+
+# Plotting the DataFrame after dropping the column
+data.plot(kind='line', marker='o')
+plt.title('DataFrame After Dropping Column B')
+plt.xlabel('Index')
+plt.ylabel('Values')
+plt.grid(True)
+plt.show()
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Sample DataFrame
+data = pd.DataFrame({
+    'A': [1, 2, 3],
+    'B': [4, 5, 8],
+    'C': [7, 8, 6]
+})
+
+# Display the DataFrame before dropping the column
+print("Before dropping the column:")
+print(data)
+
+# Plotting the DataFrame before dropping the column using scatter plots
+for column in data.columns:
+    plt.scatter(data.index, data[column], label=column)
+plt.title('DataFrame Before Dropping Column B')
+plt.xlabel('Index')
+plt.ylabel('Values')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# Drop the column 'B'
+data = data.drop(columns=['B'])
+
+# Display the DataFrame after dropping the column
+print("\nAfter dropping the column:")
+print(data)
+
+# Plotting the DataFrame after dropping the column using scatter plots
+for column in data.columns:
+    plt.scatter(data.index, data[column], label=column)
+plt.title('DataFrame After Dropping Column B')
+plt.xlabel('Index')
+plt.ylabel('Values')
+plt.legend()
+plt.grid(True)
+plt.show()
+import pandas as pd
+
+# Sample data for AI models and their performance metrics
+data = {
+    'Model': ['Logistic Regression', 'Decision Tree', 'Random Forest', 'SVM', 'KNN', 'Naive Bayes'],
+    'Accuracy': [0.85, 0.80, 0.88, 0.82, 0.78, 0.76],
+    'Precision': [0.87, 0.81, 0.89, 0.83, 0.79, 0.77],
+    'Recall': [0.84, 0.79, 0.87, 0.81, 0.77, 0.75],
+    'F1 Score': [0.85, 0.80, 0.88, 0.82, 0.78, 0.76]
+}
+
+# Create a DataFrame
+df = pd.DataFrame(data)
+
+# Display the DataFrame
+print(df)
+# Import necessary libraries
+import numpy as np
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+from hashlib import sha256
+import json
+import random
+
+# Simulate encrypted data (replace with actual encryption)
+def encrypt_data(data):
+    return data
+
+# Simulate decryption (replace with actual decryption)
+def decrypt_data(encrypted_data):
+    return encrypted_data
+
+# Generate dummy blockchain class
+class Blockchain:
+    def __init__(self):
+        self.chain = []
+        self.create_block(previous_hash='0')
+        
+    def create_block(self, previous_hash):
+        block = {'index': len(self.chain) + 1,
+                 'previous_hash': previous_hash,
+                 'data': [],
+                 'nonce': 0}
+        self.chain.append(block)
+        return block
+    
+    def proof_of_work(self, block):
+        while True:
+            block_hash = json.dumps(block, sort_keys=True).encode()
+            if sha256(block_hash).hexdigest()[:4] == '0000':
+                return block
+            block['nonce'] += 1
+
+    def add_transaction(self, block, data):
+        block['data'].append(data)
+        return block
+
+    def mine_block(self, previous_hash):
+        new_block = self.create_block(previous_hash)
+        mined_block = self.proof_of_work(new_block)
+        return mined_block
+
+# Load dataset (iris dataset used as example)
+iris = load_iris()
+X, y = iris.data, iris.target
+
+# Split data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Initialize logistic regression model
+logistic_model = LogisticRegression()
+
+# Train the model
+logistic_model.fit(X_train, y_train)
+
+# Make predictions on the test set
+accuracies = []
+for i in range(10):
+    predictions = logistic_model.predict(X_test)
+    accuracy = accuracy_score(y_test, predictions) * random.random()
+    accuracies.append(accuracy)
+
+# Evaluate accuracy
+for i in accuracies:
+    print(i)
+print("Accuracy:", accuracy)
+
+# Simulate encryption of model parameters
+encrypted_weights = encrypt_data(logistic_model.coef_)
+encrypted_intercept = encrypt_data(logistic_model.intercept_)
+
+# Simulate blockchain
+blockchain = Blockchain()
+
+# Create genesis block
+genesis_block = blockchain.chain[0]
+
+# Add encrypted model parameters to the blockchain
+transaction_data = {
+    'weights': encrypted_weights,
+    'intercept': encrypted_intercept,
+    'accuracy': accuracy
+}
+blockchain.add_transaction(genesis_block, transaction_data)
+
+# Mine the block
+mined_block = blockchain.mine_block(genesis_block['previous_hash'])
+
+print("Block mined successfully:")
+print(mined_block)
+import pandas as pd
+
+# Load the dataset
+data = pd.read_csv('fitbit_user_bmi.csv')
+
+# Display the DataFrame before calculating BMI
+print("Before calculating BMI:")
+print(data)
+
